@@ -3,6 +3,7 @@ import commonJs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import terser from '@rollup/plugin-terser';
 import { dts } from 'rollup-plugin-dts';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default [
 	{
@@ -19,12 +20,13 @@ export default [
 				sourcemap: true
 			}
 		],
-		external: [],
+		external: ['fs', 'child_process'],
 		plugins: [
 			typescript(),
 			commonJs(), // exports
 			json(), // imports
-			terser() // minify
+			terser(), // minifies
+			nodeResolve() // locates external dependencies
 		]
 	},
 	{
