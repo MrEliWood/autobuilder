@@ -3,7 +3,7 @@ import { exec } from 'child_process';
 
 const watchDirectory = (directory: string = './') => {
 	console.log(' ');
-	console.log(' 🏗️  autobuilder is watching this directory for changes');
+	console.log('🏗️  autobuilder is watching this directory for changes');
 	console.log(' ');
 
 	const ac = new AbortController();
@@ -20,8 +20,9 @@ const watchDirectory = (directory: string = './') => {
 		if (filename?.includes('lib')) return;
 
 		console.log(' ');
-		console.log(' 🏗️  autobuilder detected changes to ' + filename);
-		console.log(' 🏗️  building...');
+		console.log('autobuilder detected changes to ' + filename);
+		console.log(' ');
+		console.log('  🏗️  building...');
 		console.log(' ');
 
 		ac.abort();
