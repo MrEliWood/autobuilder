@@ -2,9 +2,9 @@ import { watch } from 'fs';
 import { exec } from 'child_process';
 
 const watchDirectory = (directory: string = './') => {
-	console.log('');
+	console.log('\x1b[90m');
 	console.log('🏗️  autobuilder is watching this directory for changes');
-	console.log('');
+	console.log('\x1b[0m');
 
 	const ac = new AbortController();
 
@@ -25,15 +25,20 @@ const watchDirectory = (directory: string = './') => {
 			return;
 		}
 
-		console.log('');
-		console.log('autobuilder detected changes to ' + filename);
-		console.log('');
+		console.log('\x1b[90m');
+		console.log('autobuilder noticed changes to ');
+		console.log('\x1b[0m' + filename);
+		console.log('\x1b[90m');
 		console.log('  🏗️  building...');
-		console.log('');
+		console.log('\x1b[0m');
 
 		logged = true;
 
-		exec('npm run build', (error, stdout) => console.log(stdout));
+		exec('npm run build', (error, stdout, stderr) => {
+			error && console.error(error);
+			stdout && console.log(stdout);
+			stderr && console.log(stderr);
+		});
 	});
 };
 
